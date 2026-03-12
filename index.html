@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pasantías en España · Ecotur International</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --deep:    #06010F;
+      --deep2:   #0D0520;
+      --purple:  #4A1A7A;
+      --purple2: #6B2FA0;
+      --amber:   #F5A623;
+      --amber2:  #E8942A;
+      --cream:   #F7F3EE;
+      --warm:    #E8DDD0;
+      --text:    #C8BFB5;
+      --white:   #FFFFFF;
+      --card-bg: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--deep);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.2; font-weight: 600; }
+    img { display: block; width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAVBAR */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background .35s;
+    }
+    #navbar.scrolled {
+      background: rgba(6,1,15,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 1rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: padding .35s;
+    }
+    #navbar.scrolled .nav-inner { padding: .7rem 2.5rem; }
+    .nav-logo img { height: 54px; width: auto; }
+    .nav-cta {
+      background: var(--amber); color: var(--deep);
+      font-size: .8rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; padding: .6rem 1.4rem;
+      border-radius: 25px; transition: background .2s, transform .2s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--amber2); transform: translateY(-1px); }
+
+    /* HERO */
+    #hero {
+      position: relative; min-height: 76vh;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: #1a0a2e url('https://images.unsplash.com/photo-1719401545205-c25ec92f2e36?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(6,1,15,.35) 0%, rgba(6,1,15,.65) 60%, rgba(6,1,15,1) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; padding: clamp(100px, 18vh, 140px) 1.5rem clamp(50px, 8vh, 80px); max-width: 820px; width: 100%; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .4rem;
+      flex-wrap: wrap; justify-content: center;
+      font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--amber);
+      border: 1px solid rgba(245,166,35,.35); padding: .4rem .9rem;
+      border-radius: 20px; margin-bottom: 1.5rem;
+      max-width: min(480px, 88vw);
+    }
+    .hero-eyebrow span { opacity: .6; }
+    #hero h1 {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      color: var(--white); margin-bottom: 1.2rem; font-weight: 700;
+    }
+    #hero h1 em { font-style: italic; color: var(--amber); }
+    .hero-sub {
+      font-size: clamp(.95rem, 2vw, 1.15rem); color: rgba(247,243,238,.75);
+      max-width: 580px; margin: 0 auto 2.4rem;
+    }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--amber); color: var(--deep);
+      font-weight: 700; font-size: .9rem; letter-spacing: .04em;
+      padding: .9rem 2rem; border-radius: 25px; transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--amber2); transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: .6rem;
+      border: 1px solid rgba(247,243,238,.35); color: var(--cream);
+      font-size: .9rem; padding: .9rem 2rem; border-radius: 25px;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-ghost:hover { border-color: var(--cream); background: rgba(255,255,255,.06); }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 1; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(247,243,238,.4); display: flex; flex-direction: column;
+      align-items: center; gap: .5rem;
+    }
+    @media (max-width: 600px) { .hero-scroll { display: none; } }
+    .hero-scroll::after {
+      content: ''; width: 1px; height: 40px;
+      background: linear-gradient(rgba(247,243,238,.4), transparent);
+      animation: scrollline 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollline { 0%,100%{opacity:.4;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+
+    /* STATS BAR */
+    #stats { background: var(--purple); }
+    .stats-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 2.2rem clamp(1.5rem, 5vw, 4rem);
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+    .stat-item {
+      text-align: center; padding: 1.2rem 1rem;
+      border-right: 1px solid rgba(255,255,255,.15);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700; color: var(--amber); line-height: 1;
+      margin-bottom: .3rem;
+    }
+    .stat-label { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+
+    /* SECTIONS */
+    .section { padding: clamp(4rem, 9vw, 7rem) clamp(1.5rem, 5vw, 4rem); }
+    .section-eyebrow {
+      font-size: .72rem; font-weight: 600; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: .8rem;
+    }
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      color: var(--white); margin-bottom: 1rem;
+    }
+    .section-title em { font-style: italic; color: var(--amber); }
+    .section-sub {
+      font-size: 1rem; color: var(--text); max-width: 600px; line-height: 1.8; margin: 0 auto;
+    }
+    .section-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* PROGRAMA */
+    #programa { background: var(--deep2); }
+    .programa-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+    .prog-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 16px; padding: 2rem 1.8rem;
+      transition: border-color .3s, transform .3s;
+      position: relative; overflow: hidden;
+    }
+    .prog-card::before {
+      content: attr(data-num);
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem; font-weight: 700;
+      color: rgba(245,166,35,.07); line-height: 1;
+      pointer-events: none;
+    }
+    .prog-card:hover { border-color: rgba(245,166,35,.4); transform: translateY(-4px); }
+    .prog-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(74,26,122,.5); border: 1px solid rgba(74,26,122,.8);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--amber); font-size: 1.1rem; margin-bottom: 1.2rem;
+    }
+    .prog-card h3 { font-size: 1.1rem; color: var(--white); margin-bottom: .6rem; font-family: 'Inter', sans-serif; font-weight: 600; }
+    .prog-card p { font-size: .88rem; color: var(--text); line-height: 1.7; }
+    .prog-highlight {
+      margin-top: .8rem; display: inline-block;
+      background: rgba(245,166,35,.12); border: 1px solid rgba(245,166,35,.25);
+      color: var(--amber); font-size: .75rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: .3rem .8rem; border-radius: 20px;
+    }
+    .timeline {
+      display: flex; align-items: stretch;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 16px; overflow: hidden; margin-top: 3.5rem;
+    }
+    .tl-phase {
+      flex: 1; padding: 1.8rem 1.5rem; text-align: center;
+      border-right: 1px solid var(--card-border);
+    }
+    .tl-phase:last-child { border-right: none; }
+    .tl-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; font-weight: 700; color: var(--amber); line-height: 1;
+    }
+    .tl-unit { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text); margin-top: .1rem; }
+    .tl-label { margin-top: .5rem; font-size: .82rem; color: var(--cream); font-weight: 500; line-height: 1.4; }
+    .tl-plus {
+      display: flex; align-items: center; padding: 0 .5rem;
+      font-size: 1.4rem; color: rgba(245,166,35,.3);
+    }
+
+    /* ESPECIALIDADES */
+    #especialidades { background: var(--deep); }
+    .esp-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 3rem;
+    }
+    @media (max-width: 768px) { .esp-split { grid-template-columns: 1fr; } }
+    .esp-card {
+      position: relative; height: 620px; overflow: hidden; border-radius: 18px;
+    }
+    .esp-card-img {
+      position: absolute; inset: 0; z-index: 0;
+      background-size: cover; background-position: center;
+      transition: transform .7s ease;
+    }
+    .esp-card:hover .esp-card-img { transform: scale(1.05); }
+    .esp-card-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(0deg, rgba(74,26,122,.88) 0%, rgba(74,26,122,.45) 55%, rgba(6,1,15,.15) 100%);
+      transition: background .4s;
+    }
+    .esp-card:hover .esp-card-overlay {
+      background: linear-gradient(0deg, rgba(74,26,122,.97) 0%, rgba(74,26,122,.6) 60%, rgba(74,26,122,.2) 100%);
+    }
+    .esp-card-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      z-index: 2; padding: 2.5rem 2rem;
+    }
+    .esp-badge {
+      display: inline-block; background: var(--amber); color: var(--deep);
+      font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .3rem .8rem; border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .esp-card h3 {
+      font-size: clamp(1.5rem, 3vw, 2rem); color: var(--white);
+      margin-bottom: .8rem; font-weight: 700;
+    }
+    .esp-card p { font-size: .88rem; color: rgba(247,243,238,.75); line-height: 1.7; margin-bottom: 1rem; }
+    .esp-modules {
+      display: flex; flex-wrap: wrap; gap: .4rem;
+      margin-top: .2rem;
+    }
+    .esp-module-tag {
+      font-size: .7rem; background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      padding: .25rem .65rem; border-radius: 20px; color: var(--cream);
+    }
+
+    /* FORMACION */
+    #formacion { background: var(--deep2); }
+    .tabs {
+      display: flex; gap: .5rem;
+      border-bottom: 1px solid var(--card-border); padding-bottom: 0;
+      margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: .85rem; font-weight: 500;
+      color: var(--text); padding: .9rem 1.5rem;
+      border-bottom: 2px solid transparent; margin-bottom: -1px;
+      transition: color .2s, border-color .2s; white-space: nowrap;
+    }
+    .tab-btn.active { color: var(--amber); border-bottom-color: var(--amber); }
+    .tab-btn:hover:not(.active) { color: var(--cream); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .modules-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    @media (max-width: 640px) { .modules-layout { grid-template-columns: 1fr; } }
+    .module-item {
+      display: flex; gap: 1rem; padding: 1.3rem 1.5rem;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 14px; transition: border-color .25s;
+    }
+    .module-item:hover { border-color: rgba(245,166,35,.3); }
+    .module-num {
+      font-family: 'Playfair Display', serif; font-size: 1.3rem;
+      font-weight: 700; color: rgba(245,166,35,.35); line-height: 1;
+      flex-shrink: 0; padding-top: .15rem; min-width: 1.5rem;
+    }
+    .module-info h4 { font-size: .93rem; color: var(--white); margin-bottom: .3rem; font-family: 'Inter', sans-serif; font-weight: 600; }
+    .module-info p { font-size: .82rem; color: var(--text); line-height: 1.6; }
+    .formacion-footer {
+      margin-top: 2.5rem;
+      background: rgba(74,26,122,.15); border: 1px solid rgba(74,26,122,.3);
+      border-radius: 16px; padding: 1.5rem 2rem;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;
+      justify-content: space-between;
+    }
+    .formacion-footer p { font-size: .88rem; color: var(--text); }
+    .formacion-footer strong { color: var(--amber); }
+
+    /* PRACTICAS */
+    #practicas { background: var(--deep); }
+    .practicas-layout {
+      display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .practicas-layout { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .practicas-img-block { position: relative; }
+    .practicas-img-block img { height: 520px; object-fit: cover; border-radius: 16px; width: 100%; }
+    .practicas-badge-float {
+      position: absolute; bottom: 1.5rem; left: 1.5rem;
+      background: rgba(6,1,15,.85); backdrop-filter: blur(8px);
+      border: 1px solid rgba(245,166,35,.3);
+      padding: 1rem 1.4rem; border-radius: 14px;
+    }
+    .practicas-badge-float .num {
+      font-family: 'Playfair Display', serif; font-size: 2.2rem;
+      font-weight: 700; color: var(--amber); line-height: 1;
+    }
+    .practicas-badge-float .lbl { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text); margin-top: .2rem; }
+    .practicas-list { display: flex; flex-direction: column; gap: .7rem; margin-top: 2rem; }
+    .practicas-venue {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.3rem;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 14px; transition: border-color .25s, transform .2s;
+    }
+    .practicas-venue:hover { border-color: rgba(245,166,35,.35); transform: translateX(4px); }
+    .venue-icon {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem;
+    }
+    .venue-icon.michelin { background: rgba(220,53,69,.12); border: 1px solid rgba(220,53,69,.25); color: #e87070; }
+    .venue-icon.hotel { background: rgba(74,26,122,.25); border: 1px solid rgba(107,47,160,.4); color: #b080e0; }
+    .venue-name { font-size: .9rem; color: var(--white); font-weight: 500; }
+    .venue-detail { font-size: .76rem; color: var(--text); margin-top: .1rem; }
+    .venue-stars { color: var(--amber); }
+    .practicas-regions {
+      display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem;
+    }
+    .region-tag {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .75rem; color: var(--text);
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      padding: .4rem .9rem; border-radius: 20px;
+    }
+    .region-tag i { font-size: .7rem; color: var(--amber); }
+
+    /* INCLUIDO */
+    #incluido {
+      background: linear-gradient(160deg, var(--deep2) 0%, rgba(74,26,122,.18) 60%, var(--deep2) 100%);
+      position: relative; overflow: hidden;
+    }
+    #incluido::before {
+      content: ''; position: absolute; top: -40%; right: -10%;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,26,122,.1), transparent 70%);
+      pointer-events: none;
+    }
+    .incluido-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.2rem; margin-top: 3rem;
+    }
+    .incluido-item {
+      padding: 2rem 1.8rem;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 16px; transition: border-color .3s, transform .25s;
+    }
+    .incluido-item:hover { border-color: rgba(245,166,35,.4); transform: translateY(-4px); }
+    .incluido-icon {
+      width: 48px; height: 48px; border-radius: 50%; margin-bottom: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .incluido-icon.amb { background: rgba(245,166,35,.15); border: 1px solid rgba(245,166,35,.3); color: var(--amber); }
+    .incluido-icon.pur { background: rgba(74,26,122,.3); border: 1px solid rgba(107,47,160,.5); color: #c080f0; }
+    .incluido-item h3 { font-size: 1rem; color: var(--white); margin-bottom: .5rem; font-family: 'Inter', sans-serif; font-weight: 600; }
+    .incluido-item p { font-size: .85rem; color: var(--text); line-height: 1.65; }
+    .highlight-val {
+      display: block; font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 700; color: var(--amber);
+      line-height: 1; margin-bottom: .3rem;
+    }
+
+
+    /* PRECIOS */
+    #precios { background: var(--deep); }
+    .precios-header { text-align: center; margin-bottom: 3rem; }
+    .precios-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      max-width: 760px; margin: 0 auto 2.5rem;
+    }
+    @media (max-width: 640px) { .precios-grid { grid-template-columns: 1fr; max-width: 380px; } }
+    .precio-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 20px; padding: 2.5rem 2rem; text-align: center;
+      position: relative; transition: border-color .25s, transform .25s;
+    }
+    .precio-card:hover { border-color: rgba(245,166,35,.5); transform: translateY(-4px); }
+    .precio-card.featured {
+      border-color: rgba(245,166,35,.5);
+      background: linear-gradient(135deg, rgba(74,26,122,.35) 0%, rgba(6,1,15,.6) 100%);
+    }
+    .precio-badge-top {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--amber); color: var(--deep);
+      font-size: .65rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .3rem .9rem; border-radius: 20px;
+      white-space: nowrap;
+    }
+    .precio-label {
+      font-size: .75rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text);
+      margin-bottom: 1.2rem; line-height: 1.5;
+    }
+    .precio-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 4.2rem); font-weight: 700;
+      color: var(--amber); line-height: 1; margin-bottom: .4rem;
+    }
+    .precio-currency { font-size: 1.8rem; vertical-align: super; }
+    .precio-desc {
+      font-size: .78rem; color: var(--text); line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .precio-includes {
+      list-style: none; text-align: left;
+      display: flex; flex-direction: column; gap: .55rem; margin-bottom: 1.8rem;
+    }
+    .precio-includes li {
+      font-size: .82rem; color: rgba(247,243,238,.75);
+      display: flex; align-items: flex-start; gap: .55rem;
+    }
+    .precio-includes li i { color: var(--amber); margin-top: .15rem; flex-shrink: 0; }
+    .precios-intakes {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .intake-label {
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text);
+    }
+    .intake-pills { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center; }
+    .intake-pill {
+      font-size: .72rem; font-weight: 600;
+      color: var(--purple); background: rgba(74,26,122,.25);
+      border: 1px solid rgba(74,26,122,.5);
+      padding: .3rem .8rem; border-radius: 20px; letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .precios-nota {
+      text-align: center; font-size: .75rem;
+      color: rgba(247,243,238,.35); max-width: 480px; margin: 0 auto;
+      line-height: 1.7;
+    }
+    .precios-cta { text-align: center; margin-top: 2.5rem; }
+
+    /* EXPERIENCIA */
+    #experiencia { padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem); background: var(--deep2); }
+    .experiencia-inner {
+      max-width: 1200px; margin: 0 auto;
+      position: relative; min-height: 520px; border-radius: 20px; overflow: hidden;
+    }
+    .experiencia-bg {
+      position: absolute; inset: 0;
+      background: #1a0a2e url('https://images.unsplash.com/photo-1578912996078-305d92249aa6?q=80&w=1742&auto=format&fit=crop') center/cover no-repeat;
+    }
+    .experiencia-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(6,1,15,.92) 0%, rgba(6,1,15,.6) 55%, rgba(6,1,15,.1) 100%);
+    }
+    .experiencia-content {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: clamp(3rem, 6vw, 5rem) clamp(3.5rem, 6vw, 5.5rem); max-width: 640px;
+    }
+    #experiencia h2 { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--white); margin-bottom: 1rem; }
+    #experiencia h2 em { font-style: italic; color: var(--amber); }
+    #experiencia p { font-size: 1rem; color: rgba(247,243,238,.75); line-height: 1.8; margin-bottom: 1.8rem; }
+    .exp-pills { display: flex; flex-wrap: wrap; gap: .7rem; }
+    .exp-pill {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .78rem; color: var(--cream);
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      padding: .45rem 1rem; border-radius: 20px;
+    }
+    .exp-pill i { color: var(--amber); font-size: .75rem; }
+
+    /* ASESOR */
+    #asesor { background: var(--deep2); }
+    .asesor-layout {
+      display: grid; grid-template-columns: 130px 1fr; gap: 3rem; align-items: center;
+    }
+    @media (max-width: 900px) { .asesor-layout { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; } .asesor-img-wrap { display: flex; justify-content: center; } .asesor-img { width: 100px; height: 100px; } .asesor-ctas { justify-content: center; } .asesor-bio { max-width: 100%; } }
+    .asesor-img-wrap { position: relative; }
+    .asesor-img {
+      width: 130px; height: 130px; object-fit: cover; border-radius: 50%; display: block;
+    }
+    .asesor-accent { display: none; }
+    .asesor-name {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--white); margin-bottom: .3rem;
+    }
+    .asesor-role {
+      font-size: .82rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 1.5rem; font-weight: 500;
+    }
+    .asesor-bio {
+      font-size: .95rem; color: var(--text); line-height: 1.85;
+      margin-bottom: 1.2rem; max-width: 520px;
+    }
+    .asesor-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: .7rem;
+      background: #25D366; color: #fff;
+      font-weight: 700; font-size: .88rem; letter-spacing: .03em;
+      padding: .9rem 2rem; border-radius: 25px;
+      transition: background .2s, transform .15s; white-space: nowrap;
+    }
+    .btn-whatsapp:hover { background: #1ab554; transform: translateY(-2px); }
+
+    .asesor-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(74,26,122,.3); border: 1px solid rgba(74,26,122,.5);
+      font-size: .75rem; color: var(--cream); padding: .4rem .9rem;
+      border-radius: 20px; margin-bottom: 1.2rem;
+    }
+    .asesor-badge i { color: var(--amber); }
+
+    /* FOOTER */
+    #footer {
+      background: var(--deep); border-top: 1px solid var(--card-border);
+      padding: 3rem clamp(1.5rem, 5vw, 4rem);
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1.5rem;
+    }
+    .footer-logos { display: flex; align-items: center; gap: 1.5rem; }
+    .footer-logos img { height: 36px; width: auto; opacity: .75; }
+    .footer-sep { width: 1px; height: 24px; background: var(--card-border); }
+    .footer-ecotur {
+      font-family: 'Playfair Display', serif; font-size: .9rem;
+      font-weight: 600; color: rgba(247,243,238,.45); letter-spacing: .04em;
+    }
+    .footer-copy { font-size: .75rem; color: rgba(247,243,238,.3); }
+
+    /* FLOATING WHATSAPP */
+    .wsp-float {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+      width: 62px; height: 62px; border-radius: 50%;
+      background: #25D366; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; box-shadow: 0 4px 20px rgba(37,211,102,.45);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .wsp-float:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(37,211,102,.65); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-left.visible { opacity: 1; transform: none; }
+    .reveal-right { opacity: 0; transform: translateX(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-right.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .timeline { flex-direction: column; }
+      .tl-phase { border-right: none !important; border-bottom: 1px solid var(--card-border); }
+      .tl-phase:last-child { border-bottom: none; }
+      .tl-plus { justify-content: center; padding: .3rem 0; }
+      .practicas-img-block img { height: 300px; }
+    }
+    @media (max-width: 600px) {
+      #navbar { padding: .8rem 1rem; }
+      .nav-cta { font-size: .68rem; padding: .45rem .85rem; letter-spacing: .04em; }
+      .nav-logo img { height: 42px; }
+      .module-item { grid-column: span 1 !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+  <a class="nav-logo" href="#">
+    <img src="data:image/png;base64,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" alt="We Study World">
+  </a>
+  <a class="nav-cta" href="https://wa.me/573150744990?text=Hola%20Michael%2C%20quiero%20informaci%C3%B3n%20sobre%20las%20pasant%C3%ADas%20en%20Espa%C3%B1a%20con%20Ecotur">
+    <i class="fab fa-whatsapp"></i>&nbsp; Hablar con un asesor
+  </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <i class="fas fa-map-marker-alt"></i>&nbsp;España
+      <span>·</span> Pasantías Internacionales
+      <span>·</span> Ecotur International
+    </div>
+    <h1>Trabaja en los mejores<br>restaurantes y hoteles<br>de <em>España</em></h1>
+    <p class="hero-sub">
+      Formación intensiva en Valencia · Prácticas remuneradas en establecimientos Michelin y hoteles 5 estrellas · Todo incluido.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn-primary" href="https://wa.me/573150744990?text=Hola%20Michael%2C%20quiero%20informaci%C3%B3n%20sobre%20las%20pasant%C3%ADas%20en%20Espa%C3%B1a%20con%20Ecotur">
+        <i class="fab fa-whatsapp"></i>&nbsp;Quiero más información
+      </a>
+      <a class="btn-ghost" href="#programa">
+        <i class="fas fa-arrow-down"></i>&nbsp;Ver el programa
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- STATS BAR -->
+<div id="stats">
+  <div class="stats-inner">
+  <div class="stat-item reveal">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Meses de programa</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">100h</div>
+    <div class="stat-label">Formación intensiva</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">+150</div>
+    <div class="stat-label">Destinos de prácticas</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">€300<span style="font-size:1.1rem">+</span></div>
+    <div class="stat-label">Mensuales remunerados</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">2</div>
+    <div class="stat-label">Especialidades disponibles</div>
+  </div>
+  </div>
+</div>
+
+<!-- PROGRAMA -->
+<section id="programa" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">El Programa</p>
+      <h2 class="section-title">Formación + experiencia<br><em>real en España</em></h2>
+      <p class="section-sub">
+        Seis meses diseñados para transformar tu perfil profesional: un mes de formación intensiva presencial en Valencia, seguido de cinco meses de prácticas remuneradas en establecimientos de élite.
+      </p>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="tl-phase">
+        <div class="tl-num">1</div>
+        <div class="tl-unit">mes</div>
+        <div class="tl-label">Formación presencial<br>en Valencia</div>
+      </div>
+      <div class="tl-plus">+</div>
+      <div class="tl-phase">
+        <div class="tl-num">5</div>
+        <div class="tl-unit">meses</div>
+        <div class="tl-label">Prácticas remuneradas<br>en establecimientos élite</div>
+      </div>
+      <div class="tl-plus">=</div>
+      <div class="tl-phase" style="background:rgba(74,26,122,.12)">
+        <div class="tl-num" style="color:#c080f0">6</div>
+        <div class="tl-unit">meses</div>
+        <div class="tl-label">Experiencia internacional<br>certificada</div>
+      </div>
+    </div>
+
+    <div class="programa-grid">
+      <div class="prog-card reveal" data-num="01">
+        <div class="prog-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+        <h3>Formación intensiva</h3>
+        <p>100 horas de clases presenciales en Valencia con instructores expertos. Material incluido y metodología 100% práctica.</p>
+        <span class="prog-highlight">1 mes · Valencia</span>
+      </div>
+      <div class="prog-card reveal" data-num="02">
+        <div class="prog-icon"><i class="fas fa-briefcase"></i></div>
+        <h3>Prácticas remuneradas</h3>
+        <p>Cinco meses en restaurantes Michelin y hoteles 5 estrellas. Sueldo mínimo de €300/mes desde el primer día de trabajo.</p>
+        <span class="prog-highlight">5 meses · España</span>
+      </div>
+      <div class="prog-card reveal" data-num="03">
+        <div class="prog-icon"><i class="fas fa-home"></i></div>
+        <h3>Alojamiento y manutención</h3>
+        <p>Vivienda y comidas cubiertas por el establecimiento de acogida durante los cinco meses completos de prácticas.</p>
+        <span class="prog-highlight">Sin costo adicional</span>
+      </div>
+      <div class="prog-card reveal" data-num="04">
+        <div class="prog-icon"><i class="fas fa-certificate"></i></div>
+        <h3>Certificación internacional</h3>
+        <p>Obtén una certificación de Ecotur International reconocida globalmente que potenciará tu carrera en cualquier país.</p>
+        <span class="prog-highlight">Reconocimiento global</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIALIDADES -->
+<section id="especialidades" class="section" style="padding-top: clamp(5rem, 10vw, 8rem);">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Especialidades</p>
+      <h2 class="section-title">Elige tu <em>camino</em></h2>
+      <p class="section-sub">Dos especialidades de clase mundial, la misma estructura de seis meses y los mismos beneficios. Tú decides dónde brillar.</p>
+    </div>
+
+    <div class="esp-split reveal">
+      <div class="esp-card">
+        <div class="esp-card-img" style="background-image:url('https://images.unsplash.com/photo-1595257841889-eca2678454e2?q=80&w=774&auto=format&fit=crop')"></div>
+        <div class="esp-card-overlay"></div>
+        <div class="esp-card-content">
+          <span class="esp-badge">Especialidad 01</span>
+          <h3>Cocina Española<br>y Mediterránea</h3>
+          <p>Domina las técnicas de la gastronomía española e internacional trabajando junto a los mejores chefs del país.</p>
+          <div class="esp-modules">
+            <span class="esp-module-tag">Higiene Alimentaria</span>
+            <span class="esp-module-tag">Productos Ibéricos</span>
+            <span class="esp-module-tag">Tapas</span>
+            <span class="esp-module-tag">Arroces</span>
+            <span class="esp-module-tag">Cocina de Cuchara</span>
+            <span class="esp-module-tag">Repostería</span>
+            <span class="esp-module-tag">Cocina de Vanguardia</span>
+          </div>
+        </div>
+      </div>
+      <div class="esp-card">
+        <div class="esp-card-img" style="background-image:url('https://images.unsplash.com/photo-1512061942530-e6a4e9a5cf27?q=80&w=1738&auto=format&fit=crop')"></div>
+        <div class="esp-card-overlay"></div>
+        <div class="esp-card-content">
+          <span class="esp-badge">Especialidad 02</span>
+          <h3>Gestión de Hospitalidad<br>y Servicio de Sala</h3>
+          <p>Aprende el arte de la hospitalidad de lujo en los hoteles y restaurantes más exclusivos de España.</p>
+          <div class="esp-modules">
+            <span class="esp-module-tag">Protocolo y Atención</span>
+            <span class="esp-module-tag">Inglés Profesional</span>
+            <span class="esp-module-tag">Marketing Turístico</span>
+            <span class="esp-module-tag">Coctelería</span>
+            <span class="esp-module-tag">Recepción y Reservas</span>
+            <span class="esp-module-tag">Vinos y Maridajes</span>
+            <span class="esp-module-tag">Montaje de Eventos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMACIÓN -->
+<section id="formacion" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Plan de Formación</p>
+      <h2 class="section-title">Lo que <em>aprenderás</em></h2>
+      <p class="section-sub">100 horas de formación intensiva presencial en Valencia, divididas en 7 módulos especializados por cada programa.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'tab-cocina')">
+          <i class="fas fa-utensils"></i>&nbsp; Cocina Española y Mediterránea
+        </button>
+        <button class="tab-btn" onclick="switchTab(this,'tab-sala')">
+          <i class="fas fa-concierge-bell"></i>&nbsp; Gestión de Hospitalidad
+        </button>
+      </div>
+
+      <div id="tab-cocina" class="tab-content active">
+        <div class="modules-layout">
+          <div class="module-item">
+            <div class="module-num">01</div>
+            <div class="module-info">
+              <h4>Higiene y Manipulación de Alimentos</h4>
+              <p>Normas HACCP, seguridad alimentaria, trazabilidad y buenas prácticas en cocina profesional.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">02</div>
+            <div class="module-info">
+              <h4>Alimentos de la Península Ibérica</h4>
+              <p>Productos DO, jamones, quesos, aceites de oliva, vinos y la despensa de la gastronomía española.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">03</div>
+            <div class="module-info">
+              <h4>Elaboración de Tapas</h4>
+              <p>Técnicas clásicas y contemporáneas: emplatado, texturas, presentación y creatividad culinaria.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">04</div>
+            <div class="module-info">
+              <h4>Arroces y Paellas</h4>
+              <p>La paella valenciana auténtica, arroces caldosos, melosos y la técnica del socarrat perfecto.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">05</div>
+            <div class="module-info">
+              <h4>Cocina de Cuchara</h4>
+              <p>Guisos, potajes y sopas de tradición española desde las distintas regiones de la Península.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">06</div>
+            <div class="module-info">
+              <h4>Repostería Española</h4>
+              <p>Postres tradicionales y técnicas de pastelería: torrijas, crema catalana, turrones y más.</p>
+            </div>
+          </div>
+          <div class="module-item" style="grid-column:1/-1">
+            <div class="module-num">07</div>
+            <div class="module-info">
+              <h4>Cocina de Vanguardia</h4>
+              <p>Tendencias actuales: esferificación, sous vide, gelificantes, fermentación y cocina creativa de autor al estilo de los grandes chefs españoles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-sala" class="tab-content">
+        <div class="modules-layout">
+          <div class="module-item">
+            <div class="module-num">01</div>
+            <div class="module-info">
+              <h4>Protocolo y Atención al Cliente</h4>
+              <p>Estándares de servicio de lujo, protocolo internacional, atención VIP y gestión de situaciones especiales.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">02</div>
+            <div class="module-info">
+              <h4>Inglés Profesional para Turismo</h4>
+              <p>Comunicación fluida en inglés orientada al sector hotelero y gastronómico: reservas, atención y situaciones reales.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">03</div>
+            <div class="module-info">
+              <h4>Marketing Turístico</h4>
+              <p>Fundamentos de marketing en hostelería, reputación online, redes sociales y estrategias de fidelización.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">04</div>
+            <div class="module-info">
+              <h4>Coctelería y Servicio al Cliente</h4>
+              <p>Técnicas de bartending, carta de cócteles, maridaje de bebidas y protocolo de bar en restaurante de lujo.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">05</div>
+            <div class="module-info">
+              <h4>Recepción y Reservas</h4>
+              <p>Sistemas PMS hoteleros, gestión de reservas, check-in/check-out y operativa completa de front desk.</p>
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">06</div>
+            <div class="module-info">
+              <h4>Vinos y Maridajes</h4>
+              <p>Cata profesional, Denominaciones de Origen españolas, carta de vinos y recomendaciones al cliente.</p>
+            </div>
+          </div>
+          <div class="module-item" style="grid-column:1/-1">
+            <div class="module-num">07</div>
+            <div class="module-info">
+              <h4>Servicio y Montaje de Eventos</h4>
+              <p>Organización de banquetes, bodas y eventos corporativos: mise en place, protocolos de sala y coordinación de equipos en eventos de alto nivel.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formacion-footer">
+        <p>📍 Formación presencial en <strong>Valencia, España</strong> &nbsp;·&nbsp; <strong>100 horas</strong> de duración &nbsp;·&nbsp; Grupos reducidos</p>
+        <a class="btn-primary" href="https://wa.me/573150744990?text=Quiero%20saber%20las%20fechas%20de%20inicio%20del%20programa" style="font-size:.82rem; padding:.7rem 1.4rem;">
+          <i class="fab fa-whatsapp"></i>&nbsp;Consultar fechas de inicio
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRÁCTICAS -->
+<section id="practicas" class="section">
+  <div class="container">
+    <div class="practicas-layout">
+      <div class="practicas-img-block reveal-left">
+        <img src="https://images.unsplash.com/photo-1705917893168-e03c7da62577?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Establecimientos de prácticas" loading="lazy">
+        <div class="practicas-badge-float">
+          <div class="num">+150</div>
+          <div class="lbl">establecimientos<br>de acogida</div>
+        </div>
+      </div>
+
+      <div class="reveal-right">
+        <p class="section-eyebrow">Destinos de Prácticas</p>
+        <h2 class="section-title">Restaurantes Michelin<br>y Hoteles <em>5 estrellas</em></h2>
+        <p class="section-sub" style="margin-bottom:1.5rem;">
+          Nuestros estudiantes hacen prácticas en los establecimientos más reconocidos de España. Tu CV hablará solo.
+        </p>
+
+        <div class="practicas-list">
+          <div class="practicas-venue">
+            <div class="venue-icon michelin"><i class="fas fa-star"></i></div>
+            <div>
+              <div class="venue-name">Quique Dacosta Restaurante</div>
+              <div class="venue-detail">Comunidad Valenciana &nbsp;·&nbsp; <span class="venue-stars">★★★ Michelin</span></div>
+            </div>
+          </div>
+          <div class="practicas-venue">
+            <div class="venue-icon michelin"><i class="fas fa-star"></i></div>
+            <div>
+              <div class="venue-name">El Poblet · Ricard Camarena ★★</div>
+              <div class="venue-detail">Valencia &nbsp;·&nbsp; <span class="venue-stars">★★ Michelin</span></div>
+            </div>
+          </div>
+          <div class="practicas-venue">
+            <div class="venue-icon hotel"><i class="fas fa-hotel"></i></div>
+            <div>
+              <div class="venue-name">Las Arenas Balneario Resort</div>
+              <div class="venue-detail">Valencia &nbsp;·&nbsp; <span class="venue-stars">★★★★★</span></div>
+            </div>
+          </div>
+          <div class="practicas-venue">
+            <div class="venue-icon hotel"><i class="fas fa-hotel"></i></div>
+            <div>
+              <div class="venue-name">Only YOU Hotel Valencia</div>
+              <div class="venue-detail">Valencia &nbsp;·&nbsp; <span class="venue-stars">★★★★★</span></div>
+            </div>
+          </div>
+          <div class="practicas-venue">
+            <div class="venue-icon michelin"><i class="fas fa-star"></i></div>
+            <div>
+              <div class="venue-name">Nerua · Guggenheim Bilbao</div>
+              <div class="venue-detail">País Vasco &nbsp;·&nbsp; <span class="venue-stars">★ Michelin</span></div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:.8rem; color:var(--text); margin-top:1.2rem; margin-bottom:1.5rem;">
+          Y muchos más en Mallorca, Sevilla, Donostia-San Sebastián, Alicante, Costa Brava...
+        </p>
+
+        <div class="practicas-regions">
+          <span class="region-tag"><i class="fas fa-map-marker-alt"></i> Comunidad Valenciana</span>
+          <span class="region-tag"><i class="fas fa-map-marker-alt"></i> País Vasco</span>
+          <span class="region-tag"><i class="fas fa-map-marker-alt"></i> Cataluña</span>
+          <span class="region-tag"><i class="fas fa-map-marker-alt"></i> Islas Baleares</span>
+          <span class="region-tag"><i class="fas fa-map-marker-alt"></i> Andalucía</span>
+          <span class="region-tag"><i class="fas fa-map-marker-alt"></i> Asturias</span>
+          <span class="region-tag"><i class="fas fa-map-marker-alt"></i> Madrid</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TODO INCLUIDO -->
+<section id="incluido" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Beneficios</p>
+      <h2 class="section-title">Todo lo que <em>incluye</em><br>el programa</h2>
+      <p class="section-sub">Un paquete completo para que solo te concentres en crecer profesionalmente.</p>
+    </div>
+
+    <div class="incluido-grid">
+      <div class="incluido-item reveal">
+        <div class="incluido-icon amb"><i class="fas fa-euro-sign"></i></div>
+        <span class="highlight-val">€300<span style="font-size:1rem">/mes</span></span>
+        <h3>Prácticas remuneradas</h3>
+        <p>Salario mensual garantizado desde el primer día de prácticas. La experiencia que se paga a sí misma.</p>
+      </div>
+      <div class="incluido-item reveal">
+        <div class="incluido-icon pur"><i class="fas fa-home"></i></div>
+        <h3>Alojamiento incluido</h3>
+        <p>El establecimiento cubre tu vivienda durante los 5 meses de prácticas. Sin preocupaciones logísticas.</p>
+      </div>
+      <div class="incluido-item reveal">
+        <div class="incluido-icon amb"><i class="fas fa-utensils"></i></div>
+        <h3>Manutención incluida</h3>
+        <p>Comidas cubiertas por el establecimiento de acogida. Vivirás la gastronomía española desde adentro.</p>
+      </div>
+      <div class="incluido-item reveal">
+        <div class="incluido-icon pur"><i class="fas fa-chalkboard-teacher"></i></div>
+        <h3>Formación intensiva</h3>
+        <p>100 horas de formación presencial en Valencia con instructores expertos y todo el material incluido.</p>
+      </div>
+      <div class="incluido-item reveal">
+        <div class="incluido-icon amb"><i class="fas fa-certificate"></i></div>
+        <h3>Certificación internacional</h3>
+        <p>Certificado de Ecotur International que respalda tu formación ante empleadores de todo el mundo.</p>
+      </div>
+      <div class="incluido-item reveal">
+        <div class="incluido-icon pur"><i class="fas fa-headset"></i></div>
+        <h3>Acompañamiento personalizado</h3>
+        <p>Seguimiento continuo antes y durante tu estadía. Tu asesor WSW siempre disponible para orientarte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PRECIOS -->
+<section id="precios" class="section">
+  <div class="container">
+  <div class="section-header precios-header">
+    <p class="section-eyebrow">Inversión</p>
+    <h2 class="section-title">Elige tu <em>plan</em></h2>
+    <p class="section-sub">6 meses que transforman tu carrera. Programa completo con todo incluido — elige si quieres alojamiento el primer mes en Valencia.</p>
+  </div>
+
+  <div class="precios-grid">
+
+    <!-- Card 1: CON alojamiento -->
+    <div class="precio-card featured reveal">
+      <span class="precio-badge-top">Más completo</span>
+      <p class="precio-label">Con alojamiento<br>primer mes (Valencia)</p>
+      <div class="precio-amount"><span class="precio-currency">€</span>2.950</div>
+      <p class="precio-desc">Incluye hospedaje en Hotel Olympia durante el mes de formación intensiva en Valencia.</p>
+      <ul class="precio-includes">
+        <li><i class="fas fa-check-circle"></i> Alojamiento en Hotel Olympia (Valencia)</li>
+        <li><i class="fas fa-check-circle"></i> Acceso a gimnasio y piscina</li>
+        <li><i class="fas fa-check-circle"></i> Formación teórica, práctica y online</li>
+        <li><i class="fas fa-check-circle"></i> 5 meses de prácticas remuneradas</li>
+        <li><i class="fas fa-check-circle"></i> 300€–400€/mes de ayuda económica</li>
+        <li><i class="fas fa-check-circle"></i> Alojamiento en destino cubierto por el restaurante/hotel</li>
+        <li><i class="fas fa-check-circle"></i> Alimentación completa cubierta por el restaurante/hotel</li>
+      </ul>
+      <a class="btn-primary" style="width:100%;justify-content:center;" href="https://wa.me/573150744990?text=Hola%20Michael%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20plan%20con%20alojamiento">
+        <i class="fab fa-whatsapp"></i>&nbsp;Quiero este plan
+      </a>
+    </div>
+
+    <!-- Card 2: SIN alojamiento -->
+    <div class="precio-card reveal">
+      <p class="precio-label">Sin alojamiento<br>primer mes</p>
+      <div class="precio-amount"><span class="precio-currency">€</span>2.150</div>
+      <p class="precio-desc">Ideal si ya tienes alojamiento propio en Valencia durante el mes de formación.</p>
+      <ul class="precio-includes">
+        <li><i class="fas fa-check-circle"></i> Formación teórica, práctica y online</li>
+        <li><i class="fas fa-check-circle"></i> 5 meses de prácticas remuneradas</li>
+        <li><i class="fas fa-check-circle"></i> 300€–400€/mes de ayuda económica</li>
+        <li><i class="fas fa-check-circle"></i> Alojamiento en destino cubierto por el restaurante/hotel</li>
+        <li><i class="fas fa-check-circle"></i> Alimentación completa cubierta por el restaurante/hotel</li>
+        <li><i class="fas fa-check-circle"></i> Camiseta bordada Ecotur</li>
+        <li><i class="fas fa-check-circle"></i> Delantal y gorro (cocina)</li>
+      </ul>
+      <a class="btn-ghost" style="width:100%;justify-content:center;" href="https://wa.me/573150744990?text=Hola%20Michael%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20plan%20sin%20alojamiento">
+        <i class="fab fa-whatsapp"></i>&nbsp;Quiero este plan
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Intakes -->
+  <div class="precios-intakes">
+    <span class="intake-label">Próximos inicios:</span>
+    <div class="intake-pills">
+      <span class="intake-pill">Febrero</span>
+      <span class="intake-pill">Abril</span>
+      <span class="intake-pill">Octubre</span>
+    </div>
+  </div>
+
+  <p class="precios-nota">* Precio en euros. No incluye tiquetes aéreos ni trámites de visa. Cupos limitados por intake.</p>
+
+  <div class="precios-cta">
+    <a class="btn-primary" href="https://wa.me/573150744990?text=Hola%20Michael%2C%20tengo%20dudas%20sobre%20el%20precio%20del%20programa%20Ecotur">
+      <i class="fab fa-whatsapp"></i>&nbsp;Hablar con un asesor
+    </a>
+  </div>
+  </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia">
+  <div class="experiencia-inner">
+  <div class="experiencia-bg"></div>
+  <div class="experiencia-content reveal-left">
+    <p class="section-eyebrow">La Experiencia</p>
+    <h2>Más que un programa,<br>una <em>transformación</em></h2>
+    <p>
+      Vivir y trabajar en España transforma tu perfil profesional y tu visión del mundo. Es sumergirte en una de las culturas culinarias y hoteleras más ricas del planeta, construir contactos internacionales y regresar con una historia que muy pocos pueden contar.
+    </p>
+    <div class="exp-pills">
+      <span class="exp-pill"><i class="fas fa-sun"></i> Clima mediterráneo</span>
+      <span class="exp-pill"><i class="fas fa-globe-europe"></i> Red de contactos global</span>
+      <span class="exp-pill"><i class="fas fa-language"></i> Inmersión cultural</span>
+      <span class="exp-pill"><i class="fas fa-users"></i> Comunidad de estudiantes</span>
+      <span class="exp-pill"><i class="fas fa-plane"></i> Explora Europa</span>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ASESOR -->
+<section id="asesor" class="section">
+  <div class="container">
+    <div class="asesor-layout">
+      <div class="asesor-img-wrap reveal-left">
+        <img class="asesor-img" src="https://images.unsplash.com/photo-1773251383594-6444e8992aa4?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Michael Guzmán" loading="lazy">
+        <div class="asesor-accent"></div>
+      </div>
+      <div class="reveal-right">
+        <div class="asesor-badge"><i class="fas fa-check-circle"></i>&nbsp; Asesor Certificado · We Study World</div>
+        <h2 class="asesor-name">Michael Guzmán</h2>
+        <p class="asesor-role">Especialista en Programas España · WSW</p>
+        <p class="asesor-bio">
+          Soy Mike, asesor especializado en programas de formación y trabajo en España. He acompañado a decenas de latinoamericanos a dar el salto a Europa, desde la primera consulta hasta el primer día de prácticas.
+        </p>
+        <p class="asesor-bio">
+          Si tienes dudas sobre el proceso, los requisitos o cómo aplicar, estoy aquí para guiarte paso a paso — sin costo y sin compromiso.
+        </p>
+        <div class="asesor-ctas">
+          <a class="btn-whatsapp" href="https://wa.me/573150744990?text=Hola%20Michael%2C%20quiero%20informaci%C3%B3n%20sobre%20las%20pasant%C3%ADas%20en%20Espa%C3%B1a%20con%20Ecotur">
+            <i class="fab fa-whatsapp"></i>&nbsp;Escribirme por WhatsApp
+          </a>
+          <a class="btn-ghost" href="mailto:michael.guzman@westudyworld.com">
+            <i class="fas fa-envelope"></i>&nbsp;michael.guzman@westudyworld.com
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner">
+  <div class="footer-logos">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAJEtJREFUeNrs3f9108jaAGCFw/+brWBNBRsqwFQQUwGhgoUKSCoAKkhSAU4FMRWstwJ8K1jfCvg0ZPzdbDY/LFszGknPc45PuHchlseaed95ZyRVFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECfHAzhQ/z48WOa+C1WBwcHq8SfYVL/mPT02I/qH4dJTtCDg4VuCiABeCgA/Vn/OEr4Fss6EL1M/Bm+1j9mCX71RX3s7xIf+/eEycuLe97vxwj65mvJD5DSs4F8jtQD5VGcoacKoIeJgn+V8Pfenv2napu5LgogAXjMZYb3mPX0dx/WQbqvx36liwJIAB50cHCwrH+sEr/Nq4S/+9ix/8taCRxAArCN1OXiWSzVtypx+T/pLD0uixz19PsEkAAMRF+XAaYZjnsS1+p7kVhEyv8AEoCn9XgZ4DhTE6VINN4mOtZQ/lcBAJAAbG3RwwrALFPbtBqslf8BJAAlSV02bnVHffxdh5na5qjlPQzK/wASgDLEsvE68du0uQxwnLmJZj059oWuCSABaCr51QA9mUUnC9qxkjBN9f3Vidxa1wSQADSVunzcyo76zOX/thMO5X8ACUBZMi0DtBEAj7ton5b2MKQ8dhsAASQAxQaRNgLgrKO22evYE9+4SPkfQAKwl2+Jf/9eDweKjy8+7KhtpgUnLsr/ABKAoisA+wbC4w7bZt89DMr/ABKAMsUycupgss/lgLOOm2if958mOqal8j9APs8H/NmuEgfanw8Hahq04ux70nHbhFn8adN/lPjKhctCzptVlf6W0tuQDAHsIgTnH+md7HBcn36UYbLDsZ+XcDyJ2+VU7wHGYKh7AEpeBpgV0kSzgo49lP9XuiOABKAtqa8GaBQQCyn/75S8jKT8DyABGIjUFYCmDwd6W1DbzBo+HMjufwAJQD/EsvKyoJn0rLAmmib6u02slP8BJAAppC4vbxXUCyv/N5rVJz52s38ACUAvA8y2N9aZFdg22x5TyqUL6/8AHXg+9A8Yyst1gA7LAEcJ32ZaPb3UcFxg84Q9DEd1Gz117KmSl9UW753bb/FWzbnP04XhCJAAtO8qcQIQZsifH/qP8Rr3o0Lb5u1jycsIy/8n8ZU9BzAcATk9G8nnTB1onno40Kzgtnnq2JT/ASQA/RTLzKvEbzPtKIjua9JR8rIusPwPIAFQBWjs3jX+wsv/jwb5eOyTnn4fAEgAfkp+OeADN9aZ9aBtjjPP/oMr3Q+gO6PaeFQH6O9V2mvx3xwcHMzvvOefPagABL/efbJhwmMP5f9f9/gefwyuI9YMR4AKQDpZlwF6Uv6/d7af+NiV/wEkAFmlLjvPnvjfbVgkOvZXGY491/cAgATgf+LNVtYJ3+Lwzk1kXiV4j8tEScDdgJ/qyoX13WUSACQAOWRZBogbAmeJjj/FDPr/n2wYjz1V+X+h2wFIALqQaxkgSfk/btRLlcS8SnjsudofAAnAv8Xyc8plgM3DgVLc+/8qfoZVlebGRpvAn/K5Bcr/ABKAzqQOQrMqXfk/5WeYxD0MqSoA87uXGgIgAcgpdRn6Y4LfuYwz/9Sf4VOP2x2ALY3y5iNxk9vfPTvsD3UC8PnO5wif4bBHn+HXNioAbgQEoAKw62CbciNdKvMt/79SLZT/ASQAJehTOfpu+b+Pn0H5H0ACUOyMutjZc8P/X3vv7uygA4YiQAKQSc+WAS57/hkeqmAAIAHoRB/K0qs6eC4f+e/f+prAACAB6MqiB8c43/O/9+EzACAByCeWpZd9nj334DMo/wNIAPoXYDu2fqL8v7Eo+DMsnGIAEoASzQdwbCUnMdb/ASQA5Sm8hH615WcIx78q8PhXW1YwAJAAmKVG6/jkwm0tCvwMNv8BSACKNoTgWeIljX0s/3/8UY5TXROQACRUaAn9quFnKG22rfwPIAHohdIC6KLnn0H5H0AC0AsllavnOz45r6RlgG9OKQAJQPEKWwbYNZAvCjn+dYFLEgBIAB6eeff5OAq6pFHwB5AA9EoJywC7lv83SlgGuHIqAUgAeiMuA6w7Pox91867nn0r/wNIAHpp3uf3L2Avg+APIAHopS7L1209Oa/LIGz3P4AEoH9i+bqrZYC29iB0GYRVAAAkAL017/P7dpjE7LuBEQAJQKe6WAZoq/y/sRhJuwEgAWhHR7vY2w7YXQRj5X8ACUDv5Q5mlz0/fuV/AAnAIOScQbf+5LwYjHPeFdDufwAJgApAIe91OdD2AkACkEacQecKaqkCda7jb3sDIwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAegea4GE/fvyYxj9ufv5WvyZP/LN1/for/nm1eR0cHKy0KAASgPKC/SQG+lf16yi+2raMr5AgLOqkYNlCcjJW67vtV7dJ+M4Ok3WWg4NFgvMu5TGvtz3HUrddrs+RcGyYDO0zJh5DlvXnWYssEoCSg34Y9N7Wr1mGDv5QtSAElW/1a96kSlAf+4+Rn7shgXp9p02uq/9Va1IkAAcJzsGUx/yvNuroONpOotexzyxjoFklHifC2PA9w2d7nSLJfOAzva9/fEoY/F8Kr+V7PtLAf1L/+CPRLL+Jw5h8hNen+rjCgHbZNBmAEdn02emt/ry6k0i3OvMMfbF+j7P6jx8Tf7aP8XOkHv8OE3+WD07Tfng2ssD/vn79Xf/xvIDg/9DgFrLy7/VxflXmh62EGfpJ7Nd/h2pGSPJjoGvL5+pmP09K0zg5Se1jlW655yJXFQMJwLaBP3Ss7zG4HvbksENV4DoOZhIBaBBIYzIQEunzWMLftwqwzjSz/dRy4nJ3LAyTjPeJfn2uNkICsNXJfli/QtC/rrpZ429rMLuOa3bA9g5jZaCVRKBOAuZV+hJ96vL8p4S/+8zGPwlAKcF/EgP/UALnwukKO9skAvvOsN9lONb3bVQt7hkTT6p0Gz3Dpc6fnWYSgBKCfyhz/VmVuc6/i2WXl0HBgLyPicBsxyrAKsx0Mxznectj4mHi2f87p5YEoJTgH2b+hwP6WF+cqtCaMDZ83aMakGtD4KzF35dy49/cxj8JQAnB/2fHHljwDzcIuXCqQpJqwHXTJKBvGwLjcoKNfwy+AhCC/2Rgn0nwh3RCxfB7rBw2SQJybAhsK3CfJzzGL+5ZIgEoYfYfOsp0gN+R8j+kdRgrAU33DOVY9/5jnw2BcRkh1bgYNv6dOn0kAF0H/9SXznRlIbuGMpOATBsCd968Z+MfY6kAvK+Gte5v9g/dJAFfG667hw2Bqa99n+14M7AwLk4SHdPCxj8JQCmz/z8G+N2s4jojkE8ImF8bVAFybYJrtI4flw1SVkXN/iUARZgNdPZ/6fSEToRL8E4bJAEXVYYNgQ3vBppy49+ZpUkJQCmOB/rduKsWdOdjw02BHzId05OTnbhcME10DCtj03AM4XHAs4zvtYwd4K8H/vvv1U014qjarypx4Z7a0Lkwi97qufbhTp114A2BMeWtxzeb+t5tcdypfDA2SQCKkOkpeSHgh52+jZ4zHjP1cHyv4s8mswnlf+jeUbh/foMbcYVx4qRKuyQZHnN8+dAGvLh0MUn03gv7kiQAJZkk/v1hxv96l4w3/pt5fG0SglCtOH6iarHacnft67YHuyrtJUMfYnu2xSykX1436NObfv17PC8nHR532Eh3sW2fr/v5h8Qz8M0xLe4J/qGdUm6ItvFPAjCqBOBNW+Wu+HvCQHIRO+osdtbJPbOIbX7fos0PWh9T6u9q6bKh8drnu7/VX95W+R/wNWlSBQh/r/774TinCY9p+sAxfUpYffhs49/wPNMEjwasJCd8+L3h0Zn160VIMm5l85uqAfDv/vIyVhJyPxmz6eV02Z8TEJdDU+2HWld5noCIBKCR3xL+7qM2HsSxxeAW9ha8jgPbmQ028HglISYCOQPSpMl+o/jo7tQ75e/e/dTGP1QAUmbZGQY2l9fAdv3ltLpZk84VmN42/PtnGY7tfVgeifcHmCR6j4WnkUoASvWfxL//pH79GdbbnCpQXBJwUeXbmDZreGw57xCY8o5/HvUrARi1kFmf10nA3/Ur/DzZ5+lcQKtJwLzKsxxwuMMjg0OCskh8XNMq7ca/pbNMAlCqVcb3OowVgZBxh+eHf48JwftM9yMA7g+0p1WejYG7bLLr6wzaxr8R6PtlgF1mp5OYEPwUL6Nbxle4U6DL3iCfEGivE7/H7zskJznuEJiCDckSgOIz/9C51lU5DwM6qm5dpxyTgpAEfKs8PhNSjgWLur8tq7T3CZjuGkyr9HcIbHViZUPyOAxhD0DpQTUMGmGTzvWPG1/jPoJDpx+0KvUttA936bdxJt2ncrqNfxIAnT6RsI4Y9hH8HZOBmdMQWpHjJlo7VRjijLoPG+ouVColAL0RdwGvenr4Ifh/jRsKT5yOsNdYsCp8LCh9Zr2uzP4lAD3U992qk+rmUsPvKgKwl9QJwHSPBCXMrC9KHkdt/JMA9DHzD51qMYCPMokVgWt7BGAn3wo/vg9VmU+yXNn4JwHos3fVcB4RG2YZ35veeAQofrJS6oZAj/qVAPS6Y62q7Z853gehAuA2xDC8JKC0DYFzG/8kAEPoWKFTvRlQJSA4ty8ABqeUzXY2/kkABpUEzGMlYGhJgOUAGM44FWbcFwUcypdYPUUCMKhKwIsqz3XBOYTlgHOnKzzpl55VAbqcqKzicxSQAAwuCVjXr7AcEF5DyHCP7AeAp/tJ4t/fWsAuYEOgjX8SgGELSwL160U82fueCHx0ynbHpZkSgKrlzXsdbgi08Y/hJwC3OtpFTARCRaCvSwMTVYB8g3MHwYX9ErTw/aRO0lKU7LvYhGfjH+NJAO5UBEIS8GvsBH1LBo6dtg/6bx+TOl9ba95mGD+WCX5nmIlfZGynMxv/GGUCcKvThT0Cn28lA+FnHx7Y4ZLA7kx7lgCM5raucXnmJPHbpBwbcm0IXMVxDsabANyTDITKwIf69TImBOFSwrBBZ1HaQFoPdlPfWicB77eefY9/jei7f1+lL/8nSwDihsAvGdrpg/v9s/FcEzzYGRfVrecL1IN1mKmFNcZX8WeXQXjiW8o+Q0tRAbCnoL3Z/x8Z3irpcwbCJXn1Z0m50XcZ75MCEoCGnXNV3ZTP5ndmcOF1nHkwlwDcb5W63cNGsxbXgVOvWS9G8r1/zTD7H0J7mvnzD5YA9ksKFiFrj8sG4QqDC63SeZKWWiszzVsVpT4nRCXM/s+rPNW4pY1zSAD6MSic1K/vOdfKw+BQv8K9BkIysHRqdSb1LG0Wg/e+PqWe7Q05YIWyfwz+J5ne8lLXQgLQD2EdLQzS1/UgcZ3zYTqxPOwOW91JnXwd7hu84/mY+pxcDPULjtf7X2cM/oG1cyQAPRgcZtU/18hDFeBrrAi8z3E3txTXCrO1bxneYxZnn7sGr/OBtEPuvj2J7f5nlXfPzVz5HwlAPzy0RjuJM7e/60Hka8qqgFvGdifjLueTeB4dNjgv3seZa47zYxAz1rCMFxP3EPS/Z571b3zRsxiiQV0FEGdX021mcHEWtxkow2xp0cbMPQaE68QfdeHUfTL45Vj2Ce8RAlR4v8v77q0e9wvMYmI6yfT5i9uwFpbiGv6TSVXG1S4L98xHAtDv2f+TyUAcpMJlMsuYEISf6206fwz6Ifk4jjOU1DO8lVP3UZdVvjsmbu5AdxITyk2C1mUAK3HD2rSn59KZ7oQEoPzZ/6Tavzx4GAeq6a3fu/njJjnoepaysh75uLAMEJO5rpZiug52F86CVnw2+0cC0A8niX//YSGzGLuRtxPWbcf4+OQLt3ptxdrsn6EbxCbAjLcCLYHrkbecvVXjvPOZoNWONxIpJAD9MKu6K/fmtHCJ4XYyPlyltNn/yre/fxKl9I8EoD/GUuo1u2uWBJxW49kwGRKeD771VpKoU82ABKAH7rnxz5Bn/2YlzY3lrowe89pOH3MXTyQAPTKGtf915fbCu1YBQtL0eeAfM9yp7sK3vV/wr19vNAMSgP7M/re98c8QZncrp+vOSUAojQ9174RnT+wvlP1fq6AgATD7L81ns7tWvB5gEhAClt3q+zlT9kcC0L/Z/6Tq5r7guWcmNna1UwVYDywJ+Pl5VIZ2tortd6opkAD0zxiCv5mJJOA+yxi8XBK6m7An5KVNtUgA+j0IDrX0+U7wT54EXPT0IywE/73bzhUT0OcEID729UV1c238UDrzMs5MLpyaaZOAmGC969G58/M6f5vV9gr8r836YRgVgM1AfhoTgTCYr3r6UTaD+0szu6znT0i0XlblP19hERPDz761Ri4EfhhoAnAnEQhr5iER2JR3+zBL2jxw5IXBvbNzJzxd8U08b0oLErdnrivf1lbmcTLwa6jyCPzwsOdD+0Cxw4fXu3iXwFfVzbMCJgUdZpjlh/vUz5Vzyzpv4r0l/qi6fb5ESGAvBa+tk6TQn75VN3fy059grAnAnUF9HmcEH+Jlg9OYEBzFV+6B6ioGfbO5cs+ZZUweP8Qk4FWGZGB95/wQxP7Zb24nzv+NP1eWy2DP8W7MH74e5KcxETiMA/1hS4lBGLRCkP9P5R7+QzlXNned/L26qSYd7ZEUbM6PvypPeAQkAEUO+LcH+PsG/FV1a+OhQO88eWyWL9ADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMCAeBogPODHjx+3Hw/92FP/FvGnJ/4BEgDoWbAPAX5av36vX5P4512t4utbTA6WdWKw1sqABKCdAftH4re4qAftd4k/w/cYbNr2oT72z4lnxn8n+vWL+thfZ5rdz+rXq/jzMPFbhsrAZf2a159v1XHfCcnNdaFde3Grvf4Tf3aWQNVtdb1nMvj4AFwb6fi6b19ax9dfm4S7bsqFkD6eBOBrHLhTCeXcXxPPOP/sYxCtjz20+9dEvz518hIG87f166TjAexLTAbWHfSdkhOAx9osDPDf6jabSwBGnQBsdZ7EcVDl7RHPenzsV4l//2EM0qmkTF6mcYabynHC351kcK/b4yRWXK47Dv5BOK/O69f3+pg+1a+JoWirNnsfEs+6vf6uX+cxkYF7z5P6Fc6Tr7HvH2qaYSUAOWYBb3saRFMnGKl+97Lt8vitwB8CbmmB9jAOVptEwCC1fbuFJO66brM/w3esSXhkrDqPyYCkcSgJQCztLPoYROOM7yjxsR8nOvaU6+WXLR7nUSzflhj477NJBN4blhrP+M5jImBw5zGbpPHaudL/CkCQehlgkqg8O8vQNqlO8OLL//V3dlrd7K/oWycPidWnGMyOKpomAtdxlqeSwlNj4yYRmIy5IfqeAORYBkgRrN9mOO7DOFvvS/Kyd/k/dOYQPOs/fhxIMDsxVu80y5NAsW0i8D1OGCQAfRMDRuobr7QarDOV/zdetXzs0ypd+f9qz2ObxVn/UAb+0M5hNntunG5sEpMACRTb+DjWqtuzAXyGy8S//6jlkuIsY9u0/V5Flv/jQP+1Sn8tfycz2liqVNZu7lwSwLbjfDXCqtsQEoC+LQO8zdg2k5az2lTJy2rXW+jGDjv0WfI0Dk6SAEkA6WyqbqcSgJ7ItAzQysw3c/n/dvBo49jDcU9KSuJGEvzvzlAkAbslAfYEsK2PY1l6ezaQz7HoQxCt8pb/2644pKxcNF7GGVnwv50EfK3YxVfJEw2cjCEJGEoCkHofQFs76l910DZHLV3qUkz5P87mxro5bmpj4E5CH/ikGWiYBAz6vhyDSABiAFklfpu9lgFuPXymk6Cx57EXU/6P7XhdjduJde2d222qGWjgU6LLqSUAXQaS3EG0w+C/d/JSpb2hzreGfz/MfpVybwamiWZo7KMmoOmYM9S+NqQEIPUywL476o87bJt9k49U6//rJk92i5n4YLPxhg6r8S6D7JXMqgKgrw0sAci0DLBTIOy4/H87eO7y70Lmm2oH9bxhGwp4/w5mJ5qhmIQWfU0C0KFF6pOgoxl4G44LPPYmd//7WHVf+t88gGrzWhbwvXqKYHMeD4u+Vns+sC8oBJSUWdrPHfU73LP+uIC22TV56bz8H6sQXezGDQF/Hs+rRXwC5X3HdxQTpdBWk8zHuHmk8Glhifi2ezt+q24qTLmv0w/f14WY1okwfm67ZPuqhTFsyH2NO4NxeO5zSu8bHs/hj3IcNTz2ScJjOW9wHOeZ2ymcQ6e7ZPthfTneVzz38R42PMaUTndot0ls81zOtzyu65QHUfA4mtL1HscVJmHvO+hjO/W10j0bYA6Q+mqAprP5kjatvS3o2L9t2eFz758Is9eX9Wz/9KEZ/2PqfxMqBS/rP55lnpn0enNkqKqFNg9tX+VZWplW9PE8CU8N/Rz72IsOqjihr51IAMp1lfj3TxtmgMcFtU3TQS/ljYu2TdROqnxr/xf1wPJ638cSx4EqBLPX1c0yQg5/DGWAr3+8ydBuE+G09+dKSBrfxX62yvjWfwylDZ8N8KSYZxg8msy2SpppbH1XwMQz73mD2XWuHdsXcTBp81xcZEwCjoZyv/uYgCWvoLgccDBjfuhnuSpHP5PHofS1ZwM9J4pYBoiX3pW2XjRr+e/t4mrL9gvJSo6ONm87+N+Z0b7L9N0O6fK2C6GNBv1sHZPtpb4mAfiW+PdvO3M4LrBtXhVw7NsmaDnWtdepA3SsSn0uKLnry4C+SD2TEzoHmQSs9DUVgJS2fThQiSfJ7Kk9DAWV/3MkUB922ey3g7Mqw7r2wG5Zmno2JwEYZhKQo+I2iL72bMAnQafLAIWW/zemHSYuVy0e577CJqKLjOfklwK+2z75r5DGDn1tUeVZQup9X3s24PPgquMv/7jgtnnq2FLu/l9s85cybbL5krndcywD/D6gPvyLcEbBfbv3fW3ICUDqCsBTO0FLXiOa7fnfd7VscIldjgTgImejZ6pMHQ2oD6f+LKuKoVYBwvLRUl8baQKQabB9+8DsteTyf3D40CVQiY+9yRMbJ4nbYJlp7f+u1JWpQSQAcR/KVAJApvFGAjBAXV0NcNyDtjnu4NibJGSpy2tXHbX7InVyN5C+m+PZD+uKIVvqa+NOAJKXWx/YCTrtQdvMGv7/bcy4VwV1rk6e5NfGXQa3mD33emYSj/+PDN/FsmKw4mbA1OfqRAJQ7gmwyjDQz+4ZvPpwUvzrMpaCyv85dDn7UwV4eEANyfP1UBNAskudcEsACpc68Nwtmae4Q1SqwerubL/z3f+3pJ7FCgCFBf74hL4cwT9HEsY4EoBeez6CzxiWAT4l/P0/Hw50a0NZihL6u0QDY0hWPj+SELTWCXcotyYNAh1tAByLV1s+EviXmOgdVfmrFt98TUgABi4sA9SD0TLxjDIEzotE5f91CJ717w6JzEnLv/tok7wkXrqY62qjMq3K3gezjrdnhlF7NpLPmXrH9/GtGXWq4JlqxjJLeOwbpa3/Vw0f6cywCP4wogQgdYef3gmmKZKXVJ/hOOGxB6sdd1svEn9nR7r/aJ1pgtGQ6I89AYgBaJXyJItrnpOWf+//lyoTPh1tOtLyf5cDw9TQ05mLHJdiUgx3k1QByBKIPmY45hRLGSEQnidsl6uRDgz3ynHdcI7rn3tqbfY/Hjnuh9H3ZHJMCcBlD4/5KlMSk6qjrPcIRql3ab/q6Ds1++/OF7P/UUnd13p/JdFoEoAMywApLO7JNvt0/fq84M417Wgj4Kuc5wz/a5e6/5xqhlFJ3dd6fy+RZyM7Ifq0+3f+wLXqfRrgrwrvXFmf2BgTjtTvaYZ7/7n0RjOMR1xq09ckAK0FpFKOtS9LGXtda51pHfuPzG2S4ymRbnBz5zysX+/c+Gl0PmZ4j78kAD0Sg0pfBoL5A59h2ZPP0Ea1JXUScPTQY5ETzf5zDEpucfzPGdprD/0Z3ew/7Gk6yfBWi7631bMRnh99WAaYPzFj6cNnaKPakmM2e55pL0B4vO0kdcAT7P6RCL3UHqN0nuE91kM4t8aYAPRhGeBb3z9DS7dazZHohKCc8lkRmxlJjtn/oiI4q8+/l8r+o5z9h+Cf4xLfQdxNcnQJQAxMpQ8MT51ci54f/7bfVa4rN07qgeMkYfC/ztTul9W4LeKs/1QoHG3wP8n0dldDaLNnIz1XSs7elk9dqxxnNiV/hjY7R66gdt52EnAr+OdYYliN/AZAYdnMev84A/+kfv2ZMfivhvIwqbEmACVnb9sGvJJ3e7fZOS4yHndIAlrZE1D/jlnG4G/2X1WzHHd+o6jAv7kFewj+Ob/7wfS1sSYAJc+U5i3/vS5mYq0tscRqSM4kIMwi/ty1GhBnI1/rP37NGPxDe38WErJs/qL7wD+L5f7v1c3emtw39LoYSls+H+MJFAJUfQKFADor7NCW296qNPy9+jMsq/KeapeiunJW5SvvBZNYDQiDy5fq5i5yy8dmIvFcOu7onPpiw9tP4bLO0z7tAch1GepDiWNHSyaTOHNv4vfYL7se7wb1MKmDEWeRJwXOGM6aDF6xE30s7DP8miIYZd7g89Ase3MPhnADkN/igHTY8aAUjudFkzaPQSflxsRFdf8S1S/VzeWQqbV2+V/dVqGdptUwhcT29QOf+4d88t6+9nJICcDzEX+Z8wITgPkOf7+kBGCZcCZ6VuW5k95DDm8FgpIqRyXO/r89lMhmukVr6NcvxSsS9LXVkD7QWPcAlLiTvvFNXAp8wNFlwu8rfM4vxqB/JVynPTvmd1X6y3CPdigxw9D6mgTgCSVdDbBrMrIYwGfYNgkIHdBlXv8Mpn1MvHMc90dXBTDmviYB6Ffw3HX2XEoSs8xUHntTDeA53C046+s17/Ea6hzVt/OOHvnMwIL/UO8vMeoEIAasEr7Yne/hXtANKS4zfmfvqnGbD6AcmWUpoCpvkyz9Enb9Xwz1wz3z/RZxU4fFvgGhhKCUeQZ5NtLzdTmEBCjjUsD7ji+1o9/Bf9CTDQlAGcHzquN/v69V7t2xcQZ8MbJzNQT/10O55t9SAIK/BKDrQWhVdbsMsG6hjL/ouBnnHX1370aUBPyc+Q/whj/hO0ydPE4qSwEI/hKAB3S5DLB38Cwgiems/UaSBGxm/oPbiGQpgMKcjSX4SwA6nsFGbZXvuwrCq64DU+ywQ+20i2pAZf8Hvr/wGXM8y8BSAA8J/evN2B4lLQH43wx61dF7t5V8LEaYPN1ux1AFeF0N6xLBz/ERt2O47PGsshRAd2PYi6E84lcC0J9A1tp7dnhXwGIejRlnki+qcp+UuK1VnPV/GFESbimArvrZm7E+TEsC0G0ga3v3fu7Aty5tXTp05NChq5sbBq16eB6GUvjLmMyMiqUAMgb+sKH2xRj7mQSgnBl02wH7W8+Pv83vMxxbeCBMKC33IbtfxMD/YeSP9rUUQCrLW4H/QnNIALoMaPO2B/oY9HIGj6uSv8xYDTitbpYFSk0EQuB/Hdf6R/+cg8xLAbOKMcz2N1W1lwK/BOAxOZcBUgXPRabjX/dl08ydROBd1f3tn9dxUHoRA/9C1/vH97WoLAWw3xj4IQb9F7Gq5iFi93iuCf4x8CzrASEMzoeZTtJUiUWOmc28h99v+G7DDOAiPpf+pH4dVzf3jM8R9EObXY1xt/EOzuJ5PEn4HqGfn1c3+0XoZ6APvsWZ/lKgbzgmaoJ/io8QTZ4ApJr1xRlNjoCW/fa/Cb/z0GbT+vUqtt20hV+72VMSBqdFSQNThnOklXMjJmmTLvtirvGgIw9u4i30Som1AC8BgBxBchN8tg1C6xj0DVIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEC//J8AAwBqg5ZiZkbs1QAAAABJRU5ErkJggg==" alt="We Study World">
+    <div class="footer-sep"></div>
+    <span class="footer-ecotur">× Ecotur International</span>
+  </div>
+  <p class="footer-copy">Hecho con ❤️ para nuestros estudiantes &nbsp;·&nbsp; © 2025 We Study World</p>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach((el, i) => {
+    el.style.transitionDelay = (i % 5) * 0.07 + 's';
+    observer.observe(el);
+  });
+
+  // Tab switcher
+  function switchTab(btn, tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+  }
+</script>
+<a class="wsp-float" href="https://wa.me/573150744990?text=Hola%20Michael%2C%20quiero%20informaci%C3%B3n%20sobre%20las%20pasant%C3%ADas%20en%20Espa%C3%B1a%20con%20Ecotur" target="_blank" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+</body>
+</html>
